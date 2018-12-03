@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <title>Docker Phase 1</title>
+        <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <style>
+            html, body {
+                background-color: #1F2833;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+              }
+           
+            #header {
+                font-family: Roboto;
+                color: #66FCF1;
+                margin: 5% auto 0;
+                text-align: center;
+            }
+            #centerForm {   
+                align-self: auto;         
+                width: 300px;
+	            margin: 3% auto 0;
+            }
+            #textArea {
+                background-color: #C5C6C7;
+                color: #0B0C10;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(204, 197, 197, 0.459);
+            }
+            #execButton {
+                color: #C5C6C7;
+                border-color: #45A29E;
+                background-color: #0B0C10;
+                font-family: Roboto;
+                font-size: 15px;
+                margin: 40px 125px 10px;
+                padding: 5px 11px 5px 11px;
+                right: 40%;
+            }
+            #outputArea {
+                background-color: #C5C6C7;
+                color: #0B0C10;
+                text-align: center;
+                white-space: pre-wrap;
+            }
+            
+        </style>
+    </head>
+    
+    <body>
+        <div id="header">
+            <h1>Execute a Python program</h1> 
+        </div>
+        <div id = "centerForm">
+            <p>
+            <textarea id= "textArea" rows = "30" cols= "40" placeholder= "Enter your code here."></textarea>
+            <button id = "execButton" type="submit" onclick= "processInput()">Execute</button>
+            </p>
+            <p>
+            <div id = "outputArea"></div>
+            </p>
+        </div>
+
+        <script>
+            function processInput() {
+                var inputCode = document.getElementById("textArea").value;
+                $.ajax({
+                    url: 'http://localhost:3000/',
+                        type: "POST",
+                        data: {
+                        "inputCode": inputCode,
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        let outputArea = document.getElementById('outputArea');
+                        outputArea.innerHTML = "OUTPUT:\n" +response;
+                    },
+                    error: function(err) {
+                        console.log("Ajax err");
+                        console.log(err);
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
