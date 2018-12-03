@@ -1,0 +1,21 @@
+{
+  "name": "broker-node",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "startBroker3": "BROKER_PORT=1339 PEERS=1338:1337 ID_START=4000 node app",
+    "startBroker2": "BROKER_PORT=1338 PEERS=1337:1339 ID_START=3000 node app",
+    "startBroker1": "BROKER_PORT=1337 PEERS=1338:1339 ID_START=2000 node app"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "hbs": "~4.0.1",
+    "http-errors": "~1.6.2",
+    "morgan": "~1.9.0",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
+  }
+}

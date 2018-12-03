@@ -1,0 +1,27 @@
+version: '2.0'
+services:
+  
+  broker1337:
+    build: ./broker-node/
+    command: bash -c "npm install && BROKER_PORT=1337 PEERS=1338:1339 ID_START=1000 node app"
+    ports:
+      - 1337:1337
+  
+  broker1338:
+    build: ./broker-node/
+    command: bash -c "npm install && BROKER_PORT=1338 PEERS=1337:1339 ID_START=2000 node app"
+    ports:
+      - 1338:1338
+
+  broker1339:
+    build: ./broker-node/
+    command: bash -c "npm install && BROKER_PORT=1339 PEERS=1337:1338 ID_START=3000 node app"
+    ports:
+      - 1339:1339
+
+  client:
+    build: ./pub-sub-client/
+    command: bash -c "npm install && npm start"
+    ports:
+      - 3030:3000
+  
